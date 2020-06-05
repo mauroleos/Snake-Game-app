@@ -1,72 +1,20 @@
-var canvas;
-var canvasContext;
-var snakeX = 50;
-var snakeSpeedX = 10;
-var snakeY = 10;
-var snakeSpeedY = 4;
+var canvas = document.getElementById('game-canvas');
+var canvasContext = canvas.getContext('2d');
+snake = 50;
+apple = 500;
 
-var paddle1Y = 250;
-const PADDLE_HEIGHT = 100;
+canvasContext.beginPath();
+canvasContext.rect(0, 0, 800, 600);
+canvasContext.fillStyle = 'black';
+canvasContext.fill();
 
-function calculateMousePos(e) {
-    var rect = canvas.getBoundingClientRect();
-    var root = document.documentElement;
-    var mouseX = e.clientX - rect.left - root.scrollLeft;
-    var mouseY = e.clientY - rect.top - root.scrollTop;
-    return {
-        x:mouseX, y:mouseY
-    };
-}
+canvasContext.beginPath();
+canvasContext.rect(snake, 100, 25, 25);
+canvasContext.fillStyle = 'yellow';
+canvasContext.fill();
 
-window.onload = function() {
-    canvas = document.getElementById('game-canvas')
-    canvasContext = canvas.getContext('2d');
-    
-    var framesPerSecond = 30;
-    setInterval(function() {
-        moveEverything();
-        drawEverything();
-    }, 1000/framesPerSecond);
+canvasContext.beginPath();
+canvasContext.rect(apple, 400, 25, 25);
+canvasContext.fillStyle = 'red';
+canvasContext.fill();
 
-    canvas.addEventListener('mousemove', function(e) {
-        var mousePos = calculateMousePos(e);
-        paddle1Y = mousePos.y - (PADDLE_HEIGHT/2); 
-    });
-}
-
-function moveEverything() {
-    snakeX += snakeSpeedX;
-    snakeY += snakeSpeedY;
-
-    if (snakeX < 0) {
-        snakeSpeedX = -snakeSpeedX;
-    }
-    if (snakeX > canvas.width) {
-        snakeSpeedX = -snakeSpeedX;
-    }
-    if (snakeY < 0) {
-        snakeSpeedY = -snakeSpeedY;
-    }
-    if (snakeY > canvas.height) {
-        snakeSpeedY = -snakeSpeedY;
-    }
-}
-
-function drawEverything() {
-    colorRect(0,0,canvas.width,canvas.height, 'black')
-    colorRect(0,paddle1Y,10,PADDLE_HEIGHT, 'white')
-
-    colorCircle(snakeX, snakeY, 10, 'white');
-}
-
-function colorCircle(centerX, centerY, radius, drawColor) {
-    canvasContext.fillStyle = drawColor;
-    canvasContext.beginPath();
-    canvasContext.arc(centerX, centerY, radius, 0, Math.PI*2, true);
-    canvasContext.fill();
-}
-
-function colorRect (leftX, topY, width, height, drawColor) {
-    canvasContext.fillStyle = drawColor;
-    canvasContext.fillRect(leftX, topY, width, height);
-}
