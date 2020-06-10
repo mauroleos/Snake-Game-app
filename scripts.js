@@ -23,6 +23,6 @@ canvasContext.fill();
 
 canvas.addEventListener('keydown', function (e){
     if(e.keycode = 39){
-        alert('it works')
+        snakePositionY += 5;
     }
 })
