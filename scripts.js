@@ -1,14 +1,25 @@
-canvas = document.getElementById('game-canvas');
-canvasContext = canvas.getContext('2d');
+const DEBUG = true; 
+var canvas = document.getElementById('game-canvas');
+var canvasContext = canvas.getContext('2d');
 document.addEventListener('keydown', keyPush);
-setInterval(game, 1000/15);
 
 var snakeVelocityX = 0;
 var snakeVelocityY = 0; 
 var snakePositionX = 150;
 var snakePositionY = 150;
-var appleX = 500;
-var appleY = 400;
+var appleX = 400;
+var appleY = 300;
+
+var gameTimeInterval = 40;
+
+if (DEBUG === true) {
+    appleX = 200;
+    appleY = 150;
+
+    gameTimeInterval = 1000;
+}
+
+setInterval(game, gameTimeInterval);
 
 function game() {
     snakePositionX += snakeVelocityX;
@@ -21,12 +32,12 @@ function game() {
 
     canvasContext.beginPath();
     canvasContext.fillStyle = 'yellow';
-    canvasContext.rect(snakePositionX, snakePositionY, 25, 25);
+    canvasContext.rect(snakePositionX, snakePositionY, 15, 15);
     canvasContext.fill();
 
     canvasContext.beginPath();
     canvasContext.fillStyle = 'red';
-    canvasContext.rect(appleX, appleY, 25, 25);
+    canvasContext.rect(appleX, appleY, 15, 15);
     canvasContext.fill();
 }
 
