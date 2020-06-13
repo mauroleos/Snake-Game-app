@@ -1,4 +1,4 @@
-const DEBUG = true; 
+const DEBUG = false; 
 var canvas = document.getElementById('game-canvas');
 var canvasContext = canvas.getContext('2d');
 document.addEventListener('keydown', keyPush);
@@ -22,8 +22,8 @@ if (DEBUG === true) {
 setInterval(game, gameTimeInterval);
 
 function game() {
-    snakePositionX += snakeVelocityX;
-    snakePositionY += snakeVelocityY;
+ snakePositionX += snakeVelocityX;
+ snakePositionY += snakeVelocityY;
     
     canvasContext.beginPath();
     canvasContext.fillStyle = 'black';
@@ -39,6 +39,13 @@ function game() {
     canvasContext.fillStyle = 'red';
     canvasContext.rect(appleX, appleY, 15, 15);
     canvasContext.fill();
+
+    if (snakePositionX < 0 || snakePositionX >= canvas.width) {
+        alert('Game Over');
+    }
+    if (snakePositionY < 0 || snakePositionY >= canvas.height) {
+        alert('Game Over');
+    }
 }
 
 function keyPush(e){
@@ -61,4 +68,3 @@ function keyPush(e){
         break;
     }
 }
-"testing"
