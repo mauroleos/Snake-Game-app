@@ -50,9 +50,8 @@ function game() {
         alert('Game Over');
     }
 
-    if (snakePositionX > appleX && snakePositionX < parseInt(appleX) + 15 &&
-        snakePositionY > appleY && snakePositionY < parseInt(appleY) + 15
-    ) {
+    if (parseInt(snakePositionX) + 7.5 > appleX
+        && parseInt(snakePositionX) + 7.5 < parseInt(appleX) + 15 && snakePositionY == appleY) {
         alert('apple has been consumed');
     }
 }
