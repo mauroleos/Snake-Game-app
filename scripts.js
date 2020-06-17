@@ -2,9 +2,6 @@
 var canvas = document.getElementById('game-canvas');
 var canvasContext = canvas.getContext('2d');
 
-var appleX = 400;
-var appleY = 300;
-
 const square = 15;
 const rows = canvas.height / square;
 const columns = canvas.width / square;
@@ -24,10 +21,10 @@ function Snake() {
         this.x += this.xSnakeVelocity;
         this.y += this.ySnakeVelocity;
 
-        if (parseInt(this.x) + 15 > canvas.width || this.x < 0) {
+        if (parseInt(this.x) + parseInt(square) > canvas.width || this.x < 0) {
             alert('Game Over');
         }
-        if (parseInt(this.y) + 15 > canvas.height || this.y < 0) {
+        if (parseInt(this.y) + parseInt(square) > canvas.height || this.y < 0) {
             alert('Game Over');
         }
     };
@@ -53,23 +50,35 @@ function Snake() {
         }
     }
 };
+document.addEventListener('keydown', function(e) {
+    const keyPressed = e.keyCode;
+    snake.snakeDirection(keyPressed);
+});
 
-function drawSnake() {
-    snake = new Snake();
+
+function Apple () {
+    this.x;
+    this.y;
+
+    this.draw = function () {
+        canvasContext.fillStyle = 'red';
+        canvasContext.fillRect(this.x, this.y, square, square);
+    }
 };
-drawSnake();
+
+function drawItems() {
+    snake = new Snake();
+    apple = new Apple;
+};
+drawItems();
 
 function game() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     snake.draw();
     snake.drawNewSnake();
+    apple.draw();
 };
 setInterval(game, 100);
-
-document.addEventListener('keydown', function keyPush(e) {
-    const keyPressed = e.keyCode;
-    snake.snakeDirection(keyPressed);
-});
 
 // var gameTimeInterval = 40;
 
