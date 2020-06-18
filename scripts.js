@@ -3,8 +3,8 @@ var canvas = document.getElementById('game-canvas');
 var canvasContext = canvas.getContext('2d');
 
 const square = 15;
-const rows = canvas.height / square;
-const columns = canvas.width / square;
+const rows = canvas.width / square;
+const columns = canvas.height / square;
 
 function Snake() {
     this.x = 0;
@@ -60,6 +60,11 @@ function Apple () {
     this.x;
     this.y;
 
+    this.appleLocation = function(){
+        this.x = Math.floor(Math.random() * rows) * square; 
+        this.y = Math.floor(Math.random() * columns) * square; 
+    }    
+
     this.draw = function () {
         canvasContext.fillStyle = 'red';
         canvasContext.fillRect(this.x, this.y, square, square);
@@ -69,6 +74,7 @@ function Apple () {
 function drawItems() {
     snake = new Snake();
     apple = new Apple;
+    apple.appleLocation();
 };
 drawItems();
 
