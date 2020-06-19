@@ -49,6 +49,14 @@ function Snake() {
                 break;
         }
     }
+
+    this.eat = function (apple) {
+        console.log(apple);
+        if (this.x > apple.x && this.y === apple.y) {
+            return true;
+        }
+            return false;
+        }
 };
 document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
@@ -90,9 +98,13 @@ if (DEBUG === true) {
 
 function game() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+    apple.draw();
     snake.draw();
     snake.drawNewSnake();
-    apple.draw();
+
+    if (snake.eat(apple)) {
+        console.log('eating')
+    }
 };
 
 setInterval(game, gameTimeInterval);
