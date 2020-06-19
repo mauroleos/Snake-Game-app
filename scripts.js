@@ -1,4 +1,4 @@
-// const DEBUG = true;
+const DEBUG = true;
 var canvas = document.getElementById('game-canvas');
 var canvasContext = canvas.getContext('2d');
 
@@ -69,6 +69,7 @@ function Apple () {
         canvasContext.fillStyle = 'red';
         canvasContext.fillRect(this.x, this.y, square, square);
     }
+
 };
 
 function drawItems() {
@@ -78,13 +79,23 @@ function drawItems() {
 };
 drawItems();
 
+var gameTimeInterval = 100;
+
+if (DEBUG === true) {
+    apple.x = 100;
+    apple.y = 0
+
+    gameTimeInterval = 1000;
+}
+
 function game() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     snake.draw();
     snake.drawNewSnake();
     apple.draw();
 };
-setInterval(game, 100);
+
+setInterval(game, gameTimeInterval);
 
 // var gameTimeInterval = 40;
 
