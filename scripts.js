@@ -50,20 +50,20 @@ function Snake() {
         }
     }
 };
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
     snake.snakeDirection(keyPressed);
 });
 
 
-function Apple () {
+function Apple() {
     this.x;
     this.y;
 
-    this.appleLocation = function(){
-        this.x = Math.floor(Math.random() * rows) * square; 
-        this.y = Math.floor(Math.random() * columns) * square; 
-    }    
+    this.appleLocation = function () {
+        this.x = Math.floor(Math.random() * rows) * square;
+        this.y = Math.floor(Math.random() * columns) * square;
+    }
 
     this.draw = function () {
         canvasContext.fillStyle = 'red';
@@ -96,14 +96,3 @@ function game() {
 };
 
 setInterval(game, gameTimeInterval);
-
-// var gameTimeInterval = 40;
-
-// if (DEBUG === true) {
-//     appleX = 200;
-//     appleY = 150;
-
-//     gameTimeInterval = 100;
-// }
-
-// var game = setInterval(game, gameTimeInterval);
