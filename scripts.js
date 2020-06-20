@@ -1,4 +1,4 @@
-const DEBUG = true;
+const DEBUG = false;
 var canvas = document.getElementById('game-canvas');
 var canvasContext = canvas.getContext('2d');
 
@@ -11,6 +11,8 @@ function Snake() {
     this.y = 0;
     this.xSnakeVelocity = square;
     this.ySnakeVelocity = 0;
+    this.total = 0;
+    this.snakeTail = [];
 
     this.draw = function () {
         canvasContext.fillStyle = 'yellow';
@@ -18,6 +20,11 @@ function Snake() {
     }
 
     this.drawNewSnake = function () {
+        
+        for (let i = 0; i < snakeTail.length; i++) {
+            this.snakeTail[i] = this.snakeTail[i+1];
+            
+        }
         this.x += this.xSnakeVelocity;
         this.y += this.ySnakeVelocity;
 
@@ -68,8 +75,8 @@ function Apple() {
     this.y;
 
     this.appleLocation = function () {
-        this.x = Math.floor(Math.random() * rows - 1) * square;
-        this.y = Math.floor(Math.random() * columns - 1) * square;
+        this.x = Math.floor(Math.random() * rows) * square;
+        this.y = Math.floor(Math.random() * columns) * square;
     }
 
     this.draw = function () {
