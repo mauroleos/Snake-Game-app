@@ -54,8 +54,8 @@ function Snake() {
         if (this.x === apple.x && this.y === apple.y) {
             return true;
         }
-            return false;
-        }
+        return false;
+    }
 };
 document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
