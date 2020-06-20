@@ -51,8 +51,7 @@ function Snake() {
     }
 
     this.eat = function (apple) {
-        console.log(apple);
-        if (this.x > apple.x && this.y === apple.y) {
+        if (this.x === apple.x && this.y === apple.y) {
             return true;
         }
             return false;
@@ -69,15 +68,14 @@ function Apple() {
     this.y;
 
     this.appleLocation = function () {
-        this.x = Math.floor(Math.random() * rows) * square;
-        this.y = Math.floor(Math.random() * columns) * square;
+        this.x = Math.floor(Math.random() * rows - 1) * square;
+        this.y = Math.floor(Math.random() * columns - 1) * square;
     }
 
     this.draw = function () {
         canvasContext.fillStyle = 'red';
         canvasContext.fillRect(this.x, this.y, square, square);
     }
-
 };
 
 function drawItems() {
@@ -90,7 +88,7 @@ drawItems();
 var gameTimeInterval = 100;
 
 if (DEBUG === true) {
-    apple.x = 100;
+    apple.x = square * 3;
     apple.y = 0
 
     gameTimeInterval = 1000;
@@ -103,7 +101,7 @@ function game() {
     snake.drawNewSnake();
 
     if (snake.eat(apple)) {
-        console.log('eating')
+        apple.appleLocation();
     }
 };
 
