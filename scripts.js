@@ -11,7 +11,7 @@ function Snake() {
     this.y = 0;
     this.xSnakeVelocity = square;
     this.ySnakeVelocity = 0;
-    this.total = 0;
+    this.totalApplesEaten = 0;
     this.snakeTail = [];
 
     this.draw = function () {
@@ -29,7 +29,7 @@ function Snake() {
             this.snakeTail[i] = this.snakeTail[i + 1];
         };
 
-        this.snakeTail[this.total - 1] = { x: this.x, y: this.y };
+        this.snakeTail[this.totalApplesEaten - 1] = { x: this.x, y: this.y };
 
         this.x += this.xSnakeVelocity;
         this.y += this.ySnakeVelocity;
@@ -65,7 +65,7 @@ function Snake() {
 
     this.eat = function (apple) {
         if (this.x === apple.x && this.y === apple.y) {
-            this.total++;
+            this.totalApplesEaten++;
             return true;
         }
         return false;
@@ -101,7 +101,7 @@ drawItems();
 
 var gameTimeInterval = 100;
 
-if (DEBUG === true) {
+if (DEBUG) {
     apple.x = square * 3;
     apple.y = 0
 
