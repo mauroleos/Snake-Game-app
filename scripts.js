@@ -27,7 +27,7 @@ function Snake() {
 
         for (let i = 0; i < this.snakeTail.length - 1; i++) {
             this.snakeTail[i] = this.snakeTail[i + 1];
-        };
+        }
 
         this.snakeTail[this.totalApplesEaten - 1] = { x: this.x, y: this.y };
 
@@ -40,7 +40,7 @@ function Snake() {
         if (parseInt(this.y) + parseInt(square) > canvas.height || this.y < 0) {
             alert('Game Over');
         }
-    };
+    }
 
     this.snakeDirection = function (keyPressed) {
         switch (keyPressed) {
@@ -62,15 +62,23 @@ function Snake() {
                 break;
         }
     }
-
     this.eat = function (apple) {
         if (this.x === apple.x && this.y === apple.y) {
             this.totalApplesEaten++;
             return true;
         }
         return false;
-    };
-};
+    }
+    this.checkCollision = function () {
+        for (var i = 0; i < this.snakeTail.length; i++) {
+            if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
+                this.totalApplesEaten = 0;
+                this.snakeTail = [];
+                console.log('CRASH');
+            }
+        }
+    }
+}
 document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
     snake.snakeDirection(keyPressed);
@@ -90,13 +98,13 @@ function Apple() {
         canvasContext.fillStyle = 'red';
         canvasContext.fillRect(this.x, this.y, square, square);
     }
-};
+}
 
 function drawItems() {
     snake = new Snake();
     apple = new Apple;
     apple.appleLocation();
-};
+}
 drawItems();
 
 var gameTimeInterval = 100;
@@ -117,6 +125,10 @@ function game() {
     if (snake.eat(apple)) {
         apple.appleLocation();
     }
-};
+    snake.checkCollision();
+
+    document.getElementById('score').innerText = ("Score: " + snake.totalApplesEaten);
+
+}
 
 setInterval(game, gameTimeInterval);
