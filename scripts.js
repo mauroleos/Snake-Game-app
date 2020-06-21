@@ -16,15 +16,21 @@ function Snake() {
 
     this.draw = function () {
         canvasContext.fillStyle = 'yellow';
+
+        for (let i = 0; i < this.snakeTail.length; i++) {
+            canvasContext.fillRect(this.snakeTail[i].x, this.snakeTail[i].y, square, square);
+        }
         canvasContext.fillRect(this.x, this.y, square, square);
     }
 
     this.drawNewSnake = function () {
-        
-        for (let i = 0; i < snakeTail.length; i++) {
-            this.snakeTail[i] = this.snakeTail[i+1];
-            
-        }
+
+        for (let i = 0; i < this.snakeTail.length - 1; i++) {
+            this.snakeTail[i] = this.snakeTail[i + 1];
+        };
+
+        this.snakeTail[this.total - 1] = { x: this.x, y: this.y };
+
         this.x += this.xSnakeVelocity;
         this.y += this.ySnakeVelocity;
 
@@ -59,10 +65,11 @@ function Snake() {
 
     this.eat = function (apple) {
         if (this.x === apple.x && this.y === apple.y) {
+            this.total++;
             return true;
         }
         return false;
-    }
+    };
 };
 document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
