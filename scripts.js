@@ -74,7 +74,7 @@ function Snake() {
             if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
                 this.totalApplesEaten = 0;
                 this.snakeTail = [];
-                console.log('CRASH');
+                alert('CRASH');
             }
         }
     }
@@ -126,7 +126,7 @@ function game() {
         apple.appleLocation();
     }
     snake.checkCollision();
-
+    
     document.getElementById('score').innerText = ("Score: " + snake.totalApplesEaten);
 
 }
