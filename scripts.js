@@ -1,4 +1,4 @@
-const DEBUG = false;
+const DEBUG = true;
 var canvas = document.getElementById('game-canvas');
 var canvasContext = canvas.getContext('2d');
 
@@ -74,6 +74,8 @@ function Snake() {
             if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
                 this.totalApplesEaten = 0;
                 this.snakeTail = [];
+                this.x = 0;
+                this.y = 0;
                 alert('CRASH');
             }
         }
@@ -127,7 +129,7 @@ function game() {
     }
     snake.checkCollision();
     
-    document.getElementById('score').innerText = ("Score: " + snake.totalApplesEaten);
+    document.getElementById('score').innerText = (snake.totalApplesEaten)
 
 }
 
