@@ -5,6 +5,7 @@ var canvasContext = canvas.getContext('2d');
 const square = 15;
 const rows = canvas.width / square;
 const columns = canvas.height / square;
+// var gameIsOver = false;
 
 function Snake() {
     this.x = 0;
@@ -35,10 +36,12 @@ function Snake() {
         this.y += this.ySnakeVelocity;
 
         if (parseInt(this.x) + parseInt(square) > canvas.width || this.x < 0) {
-            resetGame()
+            resetGame();
+            // gameIsOver = true;
         }
         if (parseInt(this.y) + parseInt(square) > canvas.height || this.y < 0) {
-            resetGame()
+            resetGame();
+            // gameIsOver = true;
         }
     }
 
@@ -73,6 +76,7 @@ function Snake() {
         for (var i = 0; i < this.snakeTail.length; i++) {
             if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
                 resetGame()
+                // gameIsOver = true;
             }
         }
     }
@@ -114,8 +118,14 @@ function resetGame() {
     snake.snakeTail = [];
     snake.x = 0;
     snake.y = 0;
-    gameOver = true;
+    // gameIsOver = true;
 }
+
+// if (gameIsOver) {
+//     snake.x = 0;
+//     snake.y = 0;
+//     snake.totalApplesEaten = 0;
+// }
 
 var gameTimeInterval = 100;
 
@@ -137,7 +147,7 @@ function game() {
     }
     snake.checkCollision();
 
-    document.getElementById('score').innerText = (snake.totalApplesEaten)
+    document.getElementById('score').innerText = (snake.totalApplesEaten);
 
 }
 
