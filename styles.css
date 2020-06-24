@@ -7,16 +7,22 @@ body{
     display: flex;
 };
 
-#game-name {
-    text-align: center;
-    font-family: sans-serif;
-}
-
 #score-box {
     text-align: center;
     font-family: sans-serif;
 }
 
-#score {
+#game-name {
+    text-align: center;
     font-family: sans-serif;
 }
+
+h3 {
+    text-align: center;
+    font-family: sans-serif, cursive;
+
+}
+
+#score {
+    text-align: center;
+    font-family: sans-serif;
