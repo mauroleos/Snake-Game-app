@@ -5,7 +5,6 @@ var canvasContext = canvas.getContext('2d');
 const square = 15;
 const rows = canvas.width / square;
 const columns = canvas.height / square;
-// var gameIsOver = false;
 
 function Snake() {
     this.x = 0;
@@ -37,13 +36,11 @@ function Snake() {
 
         if (parseInt(this.x) + parseInt(square) > canvas.width || this.x < 0) {
             resetGame();
-            // gameIsOver = true;
-        }
+        };
         if (parseInt(this.y) + parseInt(square) > canvas.height || this.y < 0) {
             resetGame();
-            // gameIsOver = true;
-        }
-    }
+        };
+    };
 
     this.snakeDirection = function (keyPressed) {
         switch (keyPressed) {
@@ -63,24 +60,23 @@ function Snake() {
                 this.xSnakeVelocity = 0;
                 this.ySnakeVelocity = square;
                 break;
-        }
-    }
+        };
+    };
     this.eat = function (apple) {
         if (this.x === apple.x && this.y === apple.y) {
             this.totalApplesEaten++;
             return true;
-        }
+        };
         return false;
-    }
+    };
     this.checkCollision = function () {
         for (var i = 0; i < this.snakeTail.length; i++) {
             if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
-                resetGame()
-                // gameIsOver = true;
-            }
-        }
-    }
-}
+                clearInterval(resetGame);
+            };
+        };
+    };
+};
 document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
     snake.snakeDirection(keyPressed);
@@ -106,26 +102,23 @@ function drawItems() {
     snake = new Snake();
     apple = new Apple;
     apple.appleLocation();
-}
+};
 drawItems();
 
 function resetGame() {
+    console.log('reset game!')
     canvasContext.fillStyle = "White"
     canvasContext.font = "30px'"
     canvasContext.fillText("Game Over!", 300, 150)
+    // debugger;
     canvasContext.fillText("Your score was  " + snake.totalApplesEaten, 270, 250)
+    snake.totalApplesEaten = 0;
     canvasContext.fillText("Press any key to continue.", 220, 350)
     snake.snakeTail = [];
     snake.x = 0;
     snake.y = 0;
-    // gameIsOver = true;
-}
-
-// if (gameIsOver) {
-//     snake.x = 0;
-//     snake.y = 0;
-//     snake.totalApplesEaten = 0;
-// }
+    clearInterval(resetGame);
+};
 
 var gameTimeInterval = 100;
 
@@ -134,21 +127,22 @@ if (DEBUG) {
     apple.y = 0
 
     gameTimeInterval = 1000;
-}
+};
 
 function game() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     apple.draw();
     snake.draw();
     snake.drawNewSnake();
+    clearInterval(resetGame);
 
     if (snake.eat(apple)) {
         apple.appleLocation();
-    }
+    };
     snake.checkCollision();
 
     document.getElementById('score').innerText = (snake.totalApplesEaten);
 
-}
+};
 
 setInterval(game, gameTimeInterval);
