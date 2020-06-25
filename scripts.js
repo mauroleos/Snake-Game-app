@@ -34,9 +34,9 @@ function Snake() {
         this.x += this.xSnakeVelocity;
         this.y += this.ySnakeVelocity;
 
-        if ((parseInt(this.x) + parseInt(square)) >= canvas.width 
+        if (parseInt(this.x) + parseInt(square) >= canvas.width 
         || this.x < 0 
-        || (parseInt(this.y) + parseInt(square)) >= canvas.height 
+        || (parseInt(this.y) + parseInt(square)) > canvas.height 
         || this.y < 0) {
             resetGame();
         };
@@ -72,10 +72,9 @@ function Snake() {
     this.checkCollision = function () {
         for (var i = 0; i < this.snakeTail.length; i++) {
             if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
-                clearInterval(resetGame);
-            };
-        };
-    };
+            }
+        }
+    }
 };
 document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
@@ -110,14 +109,13 @@ function resetGame() {
     canvasContext.fillStyle = "White"
     canvasContext.font = "30px'"
     canvasContext.fillText("Game Over!", 300, 150)
-    // debugger;
     canvasContext.fillText("Your score was  " + snake.totalApplesEaten, 270, 250)
     snake.totalApplesEaten = 0;
     canvasContext.fillText("Press any key to continue.", 220, 350)
     snake.snakeTail = [];
     snake.x = 0;
     snake.y = 0;
-    clearInterval(resetGame);
+    clearInterval(refreshInterval);
 };
 
 var gameTimeInterval = 100;
@@ -134,15 +132,14 @@ function game() {
     apple.draw();
     snake.draw();
     snake.drawNewSnake();
-    clearInterval(resetGame);
 
     if (snake.eat(apple)) {
         apple.appleLocation();
     };
     snake.checkCollision();
 
-    document.getElementById('score').innerText = (snake.totalApplesEaten);
-
+    document.getElementById('score').innerText = (snake.totalApplesEaten);    
 };
 
-setInterval(game, gameTimeInterval);
+var refreshInterval = setInterval(game, gameTimeInterval);
+
