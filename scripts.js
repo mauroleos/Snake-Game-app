@@ -34,10 +34,10 @@ function Snake() {
         this.x += this.xSnakeVelocity;
         this.y += this.ySnakeVelocity;
 
-        if (parseInt(this.x) + parseInt(square) > canvas.width || this.x < 0) {
-            resetGame();
-        };
-        if (parseInt(this.y) + parseInt(square) > canvas.height || this.y < 0) {
+        if ((parseInt(this.x) + parseInt(square)) >= canvas.width 
+        || this.x < 0 
+        || (parseInt(this.y) + parseInt(square)) >= canvas.height 
+        || this.y < 0) {
             resetGame();
         };
     };
