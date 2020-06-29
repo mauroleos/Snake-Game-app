@@ -77,6 +77,7 @@ function Snake() {
     this.checkCollision = function () {
         for (var i = 0; i < this.snakeTail.length; i++) {
             if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
+                resetGame();
             }
         }
     }
@@ -116,7 +117,7 @@ function resetGame() {
     canvasContext.fillText("Game Over!", 300, 150)
     canvasContext.fillText("Your score was  " + snake.totalApplesEaten, 270, 250)
     snake.totalApplesEaten = 0;
-    canvasContext.fillText("Press spacebar to continue.", 220, 350)
+    canvasContext.fillText("Press the spacebar to continue.", 220, 350)
     snake.snakeTail = [];
     snake.x = 0;
     snake.y = 0;
@@ -146,14 +147,14 @@ function game() {
     document.getElementById('score').innerText = (snake.totalApplesEaten);
 };
 
-var newGame = document.addEventListener('keydown', function (e) {
-    const keyPressed = e.keyCode;
-    switch (keyPressed) {
-        case 32:
-            game();
-            setInterval(newGame, gameTimeInterval);
-            break;
-    }
-});
+// var newGame = document.addEventListener('keydown', function (e) {
+//     const keyPressed = e.keyCode;
+//     switch (keyPressed) {
+//         case 32:
+//             drawItems();
+//             game();
+//             break;
+//     }
+// });
 
 var refreshInterval = setInterval(game, gameTimeInterval);
