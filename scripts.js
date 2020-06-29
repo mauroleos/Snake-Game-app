@@ -147,14 +147,14 @@ function game() {
     document.getElementById('score').innerText = (snake.totalApplesEaten);
 };
 
-// var newGame = document.addEventListener('keydown', function (e) {
-//     const keyPressed = e.keyCode;
-//     switch (keyPressed) {
-//         case 32:
-//             drawItems();
-//             game();
-//             break;
-//     }
-// });
+var newGame = document.addEventListener('keydown', function (e) {
+    const keyPressed = e.keyCode;
+    switch (keyPressed) {
+        case 32:
+            drawItems();
+            game();
+            break;
+    }
+});
 
 var refreshInterval = setInterval(game, gameTimeInterval);
