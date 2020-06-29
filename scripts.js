@@ -153,6 +153,7 @@ var newGame = document.addEventListener('keydown', function (e) {
         case 32:
             drawItems();
             game();
+            refreshInterval = setInterval(game, gameTimeInterval)
             break;
     }
 });
