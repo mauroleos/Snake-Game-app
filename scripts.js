@@ -1,4 +1,3 @@
-const DEBUG = false;
 var canvas = document.getElementById('game-canvas');
 var canvasContext = canvas.getContext('2d');
 
@@ -125,13 +124,6 @@ function resetGame() {
 };
 
 var gameTimeInterval = 100;
-
-if (DEBUG) {
-    apple.x = square * 3;
-    apple.y = 0
-
-    gameTimeInterval = 1000;
-};
 
 function game() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
