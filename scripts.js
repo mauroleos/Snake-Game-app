@@ -4,7 +4,7 @@ const canvasContext = canvas.getContext('2d');
 const square = 15;
 const gameTimeInterval = 100;
 let gameIsOver = false;
-const rows = canvas.width / square;
+const rows = (canvas.width / square);
 const columns = canvas.height / square;
 let refreshInterval = setInterval(game, gameTimeInterval);
 
@@ -80,7 +80,7 @@ function Snake() {
         return false;
     };
     this.checkCollision = function () {
-        for (var i = 0; i < this.snakeTail.length; i++) {
+        for (let i = 0; i < this.snakeTail.length; i++) {
             if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
                 gameOver();
             }
@@ -149,7 +149,7 @@ function game() {
     document.getElementById('score').innerText = (snake.totalApplesEaten);
 };
 
-var newGame = document.addEventListener('keydown', function (e) {
+let newGame = document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
     if (e.keyCode === 32 && gameIsOver) {
         resetGame();
