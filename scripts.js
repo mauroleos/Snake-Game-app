@@ -1,9 +1,12 @@
-var canvas = document.getElementById('game-canvas');
-var canvasContext = canvas.getContext('2d');
+const canvas = document.getElementById('game-canvas');
+const canvasContext = canvas.getContext('2d');
 
 const square = 15;
+const gameTimeInterval = 100;
+let gameIsOver = false;
 const rows = canvas.width / square;
 const columns = canvas.height / square;
+let refreshInterval = setInterval(game, gameTimeInterval);
 
 function Snake() {
     this.x = 0;
@@ -17,7 +20,11 @@ function Snake() {
         canvasContext.fillStyle = 'yellow';
 
         for (let i = 0; i < this.snakeTail.length; i++) {
-            canvasContext.fillRect(this.snakeTail[i].x, this.snakeTail[i].y, square, square);
+            canvasContext.fillRect(
+                this.snakeTail[i].x,
+                this.snakeTail[i].y,
+                square,
+                square);
         }
         canvasContext.fillRect(this.x, this.y, square, square);
     }
@@ -33,11 +40,13 @@ function Snake() {
         this.x += this.xSnakeVelocity;
         this.y += this.ySnakeVelocity;
 
-        if (parseInt(this.x) + parseInt(square) >= canvas.width
-            || this.x < 0
-            || (parseInt(this.y) + parseInt(square)) > canvas.height
-            || this.y < 0) {
-            resetGame();
+        if (
+            parseInt(this.x) + parseInt(square) >= canvas.width ||
+            this.x < 0 ||
+            (parseInt(this.y) + parseInt(square)) > canvas.height ||
+            this.y < 0
+        ) {
+            gameOver();
         };
     };
 
@@ -59,11 +68,8 @@ function Snake() {
                 this.xSnakeVelocity = 0;
                 this.ySnakeVelocity = square;
                 break;
-            case 32:
-                this.x = 0;
-                this.y = 0;
-                game();
-                break;
+            default:
+                return;
         };
     };
     this.eat = function (apple) {
@@ -76,16 +82,11 @@ function Snake() {
     this.checkCollision = function () {
         for (var i = 0; i < this.snakeTail.length; i++) {
             if (this.x === this.snakeTail[i].x && this.y === this.snakeTail[i].y) {
-                resetGame();
+                gameOver();
             }
         }
     }
 };
-document.addEventListener('keydown', function (e) {
-    const keyPressed = e.keyCode;
-    snake.snakeDirection(keyPressed);
-});
-
 
 function Apple() {
     this.x;
@@ -107,23 +108,32 @@ function drawItems() {
     apple = new Apple;
     apple.appleLocation();
 };
-drawItems();
 
 function resetGame() {
-    console.log('reset game!')
+    gameIsOver = false;
+    drawItems();
+    game();
+    refreshInterval = setInterval(game, gameTimeInterval);
+};
+
+function gameOver() {
+
     canvasContext.fillStyle = "White"
+    gameIsOver = true;
     canvasContext.font = "30px'"
     canvasContext.fillText("Game Over!", 300, 150)
-    canvasContext.fillText("Your score was  " + snake.totalApplesEaten, 270, 250)
+    canvasContext.fillText(
+        "Your score was  " + snake.totalApplesEaten,
+        270,
+        250
+    )
     snake.totalApplesEaten = 0;
     canvasContext.fillText("Press the spacebar to continue.", 220, 350)
     snake.snakeTail = [];
     snake.x = 0;
     snake.y = 0;
     clearInterval(refreshInterval);
-};
-
-var gameTimeInterval = 100;
+}
 
 function game() {
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
@@ -141,13 +151,11 @@ function game() {
 
 var newGame = document.addEventListener('keydown', function (e) {
     const keyPressed = e.keyCode;
-    switch (keyPressed) {
-        case 32:
-            drawItems();
-            game();
-            refreshInterval = setInterval(game, gameTimeInterval)
-            break;
+    if (e.keyCode === 32 && gameIsOver) {
+        resetGame();
+    } else {
+        snake.snakeDirection(keyPressed)
     }
 });
 
-var refreshInterval = setInterval(game, gameTimeInterval);
+drawItems();
