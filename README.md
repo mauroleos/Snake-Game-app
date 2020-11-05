@@ -11,4 +11,4 @@ This is a Snake Game app written in Javascript, HTML, and CSS.
   The toughest part of getting this game to function properly was the snake movement. I learned to really take my time writing clean and coherent pseudocode in order to really understand what steps to take in order reach my destination without feeling overwhelmed. I also learned the importance of understanding how debugging works and how to setup the perfect debugging environment. By doing so, I was able to save myself plenty of time by speeding up the trial and error testing process. By taking my time to understand what I wanted the snake to do and writting good pseudocode, this made eveything come together splendidly at the end.
   
 # Author
-<strong>Mauro Leos</strong>-<i>Full-Stack Software Developer</i>-<a href="https://www.linkedin.com/in/mauro-leos-b4103a11b/">LinkedIn</a>
+<strong>Mauro Leos</strong> - <i>Full-Stack Software Developer</i> - <a href="https://www.linkedin.com/in/mauro-leos-b4103a11b/">LinkedIn </a> - <a href="https:/https://www.mauroleos.com//">Website</a>
